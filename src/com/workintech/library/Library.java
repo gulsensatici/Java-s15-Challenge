@@ -3,7 +3,6 @@ package com.workintech.library;
 
 import com.workintech.model.MemberRecord;
 import com.workintech.model.Book;
-import com.workintech.users.Member;
 
 import java.util.*;
 
@@ -13,7 +12,7 @@ public class Library {
     private static Map<String, MemberRecord> members = new HashMap<>();
 
 
-    public Library(List<Book> books) {
+    public Library() {
         this.books = books;
     }
 
@@ -62,9 +61,40 @@ public class Library {
         //ekleme
     }
 
-    public void takeBackBook() {
-        //ekleme
+    public void takeBackBook(String bookTitle, String memberName) {
+        Book book = findBookByTitle(bookTitle);
+        MemberRecord member = getMembers(memberName);
+
+        if(book != null && member !=null && book.isAvailable()){
+            book.isAvailable();
+            System.out.println(bookTitle + " "+ memberName + " isimli üye tarafından geri verildi.");
+        }else {
+            System.out.println("Hatalı işlem.");
+        }
+
     }
 
+    private MemberRecord getMembers(String memberName) {
+        return members.get(memberName);
+    }
 
+    @Override
+    public String toString() {
+        return "Library{" +
+                "books=" + books +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Library library = (Library) o;
+        return Objects.equals(books, library.books);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(books);
+    }
 }

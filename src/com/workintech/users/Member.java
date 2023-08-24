@@ -5,6 +5,7 @@ import com.workintech.model.Book;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Member extends Person {
@@ -25,11 +26,11 @@ public class Member extends Person {
     }
 
     public Set<Book> getBorrowedBooks() {
-        return borrowedBooks;
+        return (Set<Book>) borrowedBooks;
     }
 
     public void setBorrowedBooks(Set<Book> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
+        this.borrowedBooks = (List<Book>) borrowedBooks;
     }
 
     public void borrowBook(Book book){
